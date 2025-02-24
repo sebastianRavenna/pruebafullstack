@@ -1,5 +1,5 @@
 import express from "express";
-import { getData, postData } from "../controllers/dataControllers";
+import { getData, postData } from "../controllers/DataController.js";
 
 const dataRoutes = express.Router();
 
