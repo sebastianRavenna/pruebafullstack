@@ -1,10 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-
 import { dataRoutes } from "./routes/DataRoutes.js";
-
-dotenv.config(); // Cargar variables de entorno
 
 const app = express();
 

@@ -4,11 +4,13 @@ import axios from "axios";
 function App() {
   const [data, setData] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const BASEURL=import.meta.env.VITE_BACKEND_BASEURL;
+  
 
   // Obtener datos de la API (GET)
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/data`);
+      const response = await axios.get(`${BASEURL}/api/data`);
       setData(response.data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
@@ -20,7 +22,7 @@ function App() {
     e.preventDefault();
     if (!inputValue.trim()) return;
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/data`, { text: inputValue });
+      await axios.post(`${BASEURL}/api/data`, { text: inputValue });
       setInputValue("");
       fetchData(); // Actualizar la lista
     } catch (error) {
