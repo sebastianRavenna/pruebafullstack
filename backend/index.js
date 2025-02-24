@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
-import { dataRoutes } from "./routes/DataRoutes.js";
+import { connectDB } from "./src/config/db.js";
+import { dataRoutes } from "./src/routes/DataRoutes.js";
 
 dotenv.config(); // Cargar variables de entorno
 
