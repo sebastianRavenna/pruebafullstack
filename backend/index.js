@@ -24,9 +24,15 @@ app.get("/", (req, res) => {
 
 app.get("/test-db", async (req, res) => {
   try {
-    await mongoose.connection.db.admin().ping();
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(500).send("❌ MongoDB no está conectado.");
+    }
+
+    const result = await mongoose.connection.db.admin().ping();
+    console.log("Ping result:", result);
     res.send("✅ Conectado a MongoDB!");
   } catch (error) {
+    console.error("Error en /test-db:", error);
     res.status(500).send("❌ No se pudo conectar a MongoDB");
   }
 });
