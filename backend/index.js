@@ -11,6 +11,15 @@ const app = express();
 
 connectDB();
 
+app.use((req, res, next) => {
+  console.log(`📝 [${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log("📦 Headers:", req.headers);
+  if (req.method === "POST") {
+    console.log("📨 Body recibido:", req.body);
+  }
+  next();
+});
+
 // Middlewares
 app.use(cors({
   origin: "*", // Permite cualquier origen
