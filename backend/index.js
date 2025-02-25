@@ -11,6 +11,7 @@ const app = express();
 
 connectDB();
 
+app.use(express.json());
 app.use((req, res, next) => {
   console.log(`📝 [${new Date().toISOString()}] ${req.method} ${req.url}`);
   console.log("📦 Headers:", req.headers);
@@ -22,14 +23,19 @@ app.use((req, res, next) => {
 
 // Middlewares
 app.use(cors({
+  origin: ["https://pruebafullstack.vercel.app"],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type'],
   credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204
 }));
 
-app.use(express.json());
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://pruebafullstack.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.status(204).send();
+});
+
 
 // Rutas
 app.use("/api/data", dataRoutes);
