@@ -14,6 +14,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Hola mundo");
+});
+
 // Rutas
 app.use("/api/data", dataRoutes);
 
