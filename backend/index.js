@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 // Middlewares
 app.use(cors({
-  origin: ["https://pruebafullstack.vercel.app"],
+  origin: [true],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
   credentials: true,
