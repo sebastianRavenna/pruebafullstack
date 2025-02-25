@@ -22,9 +22,11 @@ app.use((req, res, next) => {
 
 // Middlewares
 app.use(cors({
-  origin: "*", // Permite cualquier origen
-  methods: ["GET", "POST"], // Permite GET y POST
-  allowedHeaders: ["Content-Type"], // Permite enviar JSON
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
 app.use(express.json());
