@@ -11,30 +11,15 @@ const app = express();
 
 connectDB();
 
-app.use(express.json());
-app.use((req, res, next) => {
-  console.log(`📝 [${new Date().toISOString()}] ${req.method} ${req.url}`);
-  console.log("📦 Headers:", req.headers);
-  if (req.method === "POST") {
-    console.log("📨 Body recibido:", req.body);
-  }
-  next();
-});
-
 // Middlewares
 app.use(cors({
-  origin: "https://pruebafullstack-2zez.vercel.app/",
+  origin: "*",
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
   credentials: false,
 }));
 
-/* app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // Permite todas las solicitudes (puedes cambiarlo por tu dominio)
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-}); */
+app.use(express.json());
 
 // Rutas
 app.use("/api/data", dataRoutes);
@@ -48,7 +33,6 @@ app.get("/test-db", async (req, res) => {
     const mongoose = await import("mongoose");
     
     // Verificar si mongoose ya está conectado
-    // Si usas import dinámico, necesitas acceder a la conexión mediante .default
     const mongooseInstance = mongoose.default || mongoose;
     
     if (!mongooseInstance.connection || mongooseInstance.connection.readyState !== 1) {

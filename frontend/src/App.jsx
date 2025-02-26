@@ -22,31 +22,15 @@ function App() {
     e.preventDefault();
     if (!inputValue.trim()) return;
     
-    console.log("Enviando datos a:", `${BASEURL}/api/data`);
-    console.log("Datos a enviar:", { text: inputValue });
-  
     try {
-      const response = await axios.post(`${BASEURL}/api/data`, { text: inputValue });
+      await axios.post(`${BASEURL}/api/data`, { text: inputValue });
       
-      console.log("Respuesta del servidor:", response.data);
       setInputValue("");
       fetchData(); // Actualizar la lista
     } catch (error) {
       console.error("Error al enviar los datos:", error);
-      if (error.response) {
-        // El servidor respondió con un código de error
-        console.error("Respuesta de error:", error.response.data);
-        console.error("Estado HTTP:", error.response.status);
-      } else if (error.request) {
-        // La solicitud fue hecha pero no se recibió respuesta
-        console.error("No se recibió respuesta del servidor");
-      } else {
-        // Error al configurar la solicitud
-        console.error("Error de configuración:", error.message);
-      }
     }
   };
-
   useEffect(() => {
     fetchData();
   }, [fetchData]);
