@@ -29,13 +29,12 @@ app.use(cors({
   credentials: false,
 }));
 
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://pruebafullstack.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.status(204).send();
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Permite todas las solicitudes (puedes cambiarlo por tu dominio)
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
 });
-
 
 // Rutas
 app.use("/api/data", dataRoutes);
