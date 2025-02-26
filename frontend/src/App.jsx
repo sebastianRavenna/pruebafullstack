@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 function App() {
@@ -8,14 +8,14 @@ function App() {
   
 
   // Obtener datos de la API (GET)
-  const fetchData = async () => {
+  const fetchData = useCallback (async () => {
     try {
       const response = await axios.get(`${BASEURL}/api/data`);
       setData(response.data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
-  };
+  }, [BASEURL]);
 
   // Enviar datos a la API (POST)
   const handleSubmit = async (e) => {
@@ -27,7 +27,7 @@ function App() {
   
     try {
       const response = await axios.post(`${BASEURL}/api/data`, { text: inputValue });
-      await axios.post(`${BASEURL}/api/data`, { text: inputValue });
+      
       console.log("Respuesta del servidor:", response.data);
       setInputValue("");
       fetchData(); // Actualizar la lista
@@ -49,7 +49,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <div className="container p-5">
