@@ -23,18 +23,18 @@ app.use((req, res, next) => {
 
 // Middlewares
 app.use(cors({
-  origin: true,
+  origin: "https://pruebafullstack-2zez.vercel.app/",
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
   credentials: false,
 }));
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); // Permite todas las solicitudes (puedes cambiarlo por tu dominio)
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
-});
+}); */
 
 // Rutas
 app.use("/api/data", dataRoutes);
