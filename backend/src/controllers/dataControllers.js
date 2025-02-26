@@ -15,24 +15,15 @@ const getData = async (req, res) => {
 };
 
 const postData = async (req, res) => {
-  // Si es una preflight request, responder sin procesar
-  if (req.method === "OPTIONS") {
-    return res.status(204).end();
-  }
-
-  res.setHeader("Access-Control-Allow-Origin", "https://pruebafullstack.vercel.app");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
   try {
-    const body = req.body;
-    console.log("Body recibido:", body);
+    const { text } = req.body;
+    console.log("Body recibido:", req.body);
 
-    if (!body || !body.text) {
+    if (!text) {
       return res.status(400).json({ error: "Se requiere un campo 'text'" });
     }
 
-    const newData = new Data({ text: body.text });
+    const newData = new Data({ text });
     const savedData = await newData.save();
 
     return res.status(201).json(savedData);

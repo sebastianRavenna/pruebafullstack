@@ -23,10 +23,10 @@ app.use((req, res, next) => {
 
 // Middlewares
 app.use(cors({
-  origin: [true],
+  origin: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
-  credentials: true,
+  credentials: false,
 }));
 
 app.options("*", (req, res) => {
@@ -71,3 +71,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
 
+
+export default app;
